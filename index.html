@@ -13,9 +13,25 @@
   			$.getJSON("bookmarks.json", function(data){
   				$.each(data,function(i,item){
   					bookmarks.push(item);
+  					var time = timeconvert(item.created);
+  					$("ul").append("<li><p class='title'>"+item.title+"</p><p class='time'><i>"+time+"</i></p></li>")
   				});
   			});
 		});
+
+		$(document).ready(function(){
+  			$(".search").on("input",function(){  
+   				//alert("aa");
+			});
+  		});
+
+		function timeconvert (timestamp) {
+			var time = new Date();
+			time.setTime(timestamp * 1000);
+			var month = time.getMonth()+1;
+			return "Created @ "+time.getFullYear()+"-"+month+"-"+time.getDate();
+		}
+
 	</script>
 </head>
 <body>
@@ -24,10 +40,6 @@
 	</div>
 	<div class="res">
 		<ul>
-			<li>
-				<p class="title">推荐一个</p>
-				<p class="time">Created@2013-12-17</p>
-			</li>
 		</ul>
 	</div>
 </body>
