@@ -14,16 +14,29 @@
   				$.each(data,function(i,item){
   					bookmarks.push(item);
   					var time = timeconvert(item.created);
-  					$("ul").append("<li><p class='title'>"+item.title+"</p><p class='time'><i>"+time+"</i></p></li>")
+  					$("ul").append("<li><p class='title'>"+item.title+"</p><p class='time'><i>"+time+"</i></p></li>");
   				});
   			});
 		});
 
 		$(document).ready(function(){
   			$(".search").on("input",function(){  
-   				//alert("aa");
+   				$("ul").html("");
+   				searchfor($("input").val());
 			});
   		});
+
+		function searchfor (keyword) {
+			var reg = new RegExp(keyword);
+			$.each(bookmarks,function(i,item){
+				if(item.title.match(reg))
+				{
+					var time = timeconvert(item.created);
+					$("ul").append("<li><p class='title'>"+item.title+"</p><p class='time'><i>"+time+"</i></p></li>");
+				}
+			});
+
+		}
 
 		function timeconvert (timestamp) {
 			var time = new Date();
@@ -36,7 +49,7 @@
 </head>
 <body>
 	<div class="search_div">
-		<input type="text" placeholder="Search for" name="search" class="search"/>
+	    <input type="text" placeholder="Search for" name="search" class="search"/>
 	</div>
 	<div class="res">
 		<ul>
