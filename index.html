@@ -11,7 +11,7 @@
 
 		$(document).ready(function(){
   			$.getJSON("bookmarks.json", function(data){
-  				$.each(data,function(i,item){
+  				$.each(data,function(n,item){
   					bookmarks.push(item);
   					var time = timeconvert(item.created);
   					$("ul").append("<li><p class='title'>"+item.title+"</p><p class='time'><i>"+time+"</i></p></li>");
@@ -27,12 +27,14 @@
   		});
 
 		function searchfor (keyword) {
-			var reg = new RegExp(keyword);
-			$.each(bookmarks,function(i,item){
+			var reg = new RegExp(keyword,"i");
+			$.each(bookmarks,function(n,item){
 				if(item.title.match(reg))
 				{
 					var time = timeconvert(item.created);
-					$("ul").append("<li><p class='title'>"+item.title+"</p><p class='time'><i>"+time+"</i></p></li>");
+					var title = item.title;
+					title = title.replace(reg,"<span>"+keyword+"</span>");
+					$("ul").append("<li><p class='title'>"+title+"</p><p class='time'><i>"+time+"</i></p></li>");
 				}
 			});
 

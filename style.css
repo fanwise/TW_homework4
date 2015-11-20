@@ -35,6 +35,11 @@ p {
 	padding: 0;
 }
 
+span {
+	color: white;
+	background-color: #F44698;
+}
+
 .title {
 	
 	font-size: 25px;
