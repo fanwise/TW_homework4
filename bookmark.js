@@ -18,13 +18,13 @@ $(document).ready(function(){
  });
 
 function searchfor (keyword) {
-	var reg = new RegExp(keyword,"i");
+	var reg = new RegExp("("+keyword+")","i");
 	$.each(bookmarks,function(n,item){
 		if(item.title.match(reg))
 		{
 			var time = timeconvert(item.created);
 			var title = item.title;
-			title = title.replace(reg,"<span>"+keyword+"</span>");
+			title = title.replace(reg,"<span>$1</span>");
 			$("ul").append("<li><p class='title'>"+title+"</p><p class='time'><i>"+time+"</i></p></li>");
 		}
 	});
